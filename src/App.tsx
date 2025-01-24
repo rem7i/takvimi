@@ -92,7 +92,7 @@ function App() {
           prayerName={nextPrayer}
           remainingTime={remainingTime}
         />
-
+        <SpecialEventCard note={prayerData.notes} />
         <div className="space-y-3">
           <PrayerCard name="Imsaku" time={prayerData.fajr} isNext={nextPrayer === 'Imsaku'} />
           <PrayerCard name="Lindja e Diellit" time={prayerData.sunrise} isNext={nextPrayer === 'Lindja e Diellit'} />
@@ -111,7 +111,7 @@ function App() {
           </div>
         </div>
             
-        <SpecialEventCard note={prayerData.notes} />
+        
       </div>
     </div>
   );

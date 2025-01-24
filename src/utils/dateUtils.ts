@@ -36,11 +36,11 @@ export function getHijriDate(date: Date): string {
   return `${day} ${transliteratedMonth} ${year}`;
 }
 export function calculateDaylight(prayerTime: PrayerTime): { hours: number; minutes: number } {
-  const sunrise = new Date(`2000-01-01 ${prayerTime.sunrise}`);
-  const maghrib = new Date(`2000-01-01 ${prayerTime.maghrib}`);
-  const diff = maghrib.getTime() - sunrise.getTime();
-  const hours = Math.floor(diff / (1000 * 60 * 60));
-  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+const sunrise = new Date(`2000/01/01 ${prayerTime.sunrise.replace(/\s/g, '')}`);
+const maghrib = new Date(`2000/01/01 ${prayerTime.maghrib.replace(/\s/g, '')}`);
+const diff = maghrib.getTime() - sunrise.getTime();
+const hours = Math.floor(diff / (1000 * 60 * 60));
+const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
   return { hours, minutes };
 }
 
