@@ -23,7 +23,7 @@ export function getHijriDate(date: Date): string {
     year: 'numeric'
   };
   
-  const hijriDate = date.toLocaleDateString('sq-AL', options);
+  const hijriDate = date.toLocaleDateString('sq-AL-u-ca-islamic', options);
   const [day, month, year] = hijriDate.split(' ');
   
   // Find the corresponding transliterated month name
@@ -74,9 +74,17 @@ export function getNextPrayer(prayerTime: PrayerTime): { name: string; remaining
     }
   }
 
-  // If no next prayer found today, return Fajr of next day
+  // Calculate time until tomorrow's Fajr
+  const [fajrHours, fajrMinutes] = prayerTime.fajr.split(':').map(Number);
+  const tomorrowFajr = fajrHours * 3600 + fajrMinutes * 60;
+  const timeUntilTomorrow = (24 * 3600 - currentTime) + tomorrowFajr;
+  
+  const remainingHours = Math.floor(timeUntilTomorrow / 3600);
+  const remainingMinutes = Math.floor((timeUntilTomorrow % 3600) / 60);
+  const remainingSeconds = timeUntilTomorrow % 60;
+
   return {
     name: 'Imsaku',
-    remainingTime: 'Nesër'
+    remainingTime: `${remainingHours}:${remainingMinutes}:${remainingSeconds}`
   };
 }
