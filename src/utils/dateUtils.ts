@@ -23,7 +23,7 @@ export function getHijriDate(date: Date): string {
     year: 'numeric'
   };
   
-  const hijriDate = date.toLocaleDateString('sq-AL-u-ca-islamic', options);
+  const hijriDate = date.toLocaleDateString('en-US-u-ca-islamic', options);
   const [day, month, year] = hijriDate.split(' ');
   
   // Find the corresponding transliterated month name
