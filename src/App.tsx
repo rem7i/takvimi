@@ -7,7 +7,7 @@ import { calculateDaylight, getNextPrayer } from './utils/dateUtils';
 import { getHijriDate, isRamadan } from './utils/hijriDateUtils';
 import { parsePrayerTimes, getPrayerTimeForDate } from './utils/csvUtils';
 import { PrayerTime } from './types';
-import { Sun, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Sun, ChevronLeft, ChevronRight, Calendar } from 'lucide-react';
 import { prayerTimesData } from './data/prayer-times';
 
 
@@ -102,11 +102,14 @@ function App() {
           remainingTime={remainingTime}
         />
         <SpecialEventCard note={prayerData.notes} />
+        <div className="flex items-center mb-2">
+            <Calendar className="w-5 h-5 text-gray-600" />
+            <span className="text-gray-900 font-medium">
+            Vaktet për datën {selectedDate.toLocaleDateString()}:
+            </span>
+          </div>
+        
         <div className="space-y-3">
-          Vaktet për datën:
-          <span> {selectedDate.toDateString()}</span>    
-        </div>
-        <div className="grid grid-cols-2 gap-4">
           <PrayerCard name="Imsaku" time={prayerData.fajr} isNext={nextPrayer === 'Imsaku'} />
           <PrayerCard name="Lindja e Diellit" time={prayerData.sunrise} isNext={nextPrayer === 'Lindja e Diellit'} />
           <PrayerCard name="Dreka" time={prayerData.dhuhr} isNext={nextPrayer === 'Dreka'} />
