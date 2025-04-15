@@ -96,19 +96,18 @@ function App() {
             <ChevronRight className="w-5 h-5 text-gray-600" />
           </button>
         </div>
-
-        <NextPrayerCard 
-          prayerName={nextPrayer}
-          remainingTime={remainingTime}
-        />
-        <SpecialEventCard note={prayerData.notes} />
         <div className="flex items-center mb-2">
             <Calendar className="w-5 h-5 text-gray-600" />
             <span className="text-gray-900 font-medium">
             Vaktet për datën {selectedDate.toLocaleDateString()}:
             </span>
-          </div>
-        
+        </div>
+        <NextPrayerCard 
+          prayerName={nextPrayer}
+          remainingTime={remainingTime}
+        />
+        <SpecialEventCard note={prayerData.notes} />
+                
         <div className="space-y-3">
           <PrayerCard name="Imsaku" time={prayerData.fajr} isNext={nextPrayer === 'Imsaku'} />
           <PrayerCard name="Lindja e Diellit" time={prayerData.sunrise} isNext={nextPrayer === 'Lindja e Diellit'} />
