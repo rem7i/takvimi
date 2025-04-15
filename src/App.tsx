@@ -3,11 +3,13 @@ import { PrayerCard } from './components/PrayerCard';
 import { NextPrayerCard } from './components/NextPrayerCard';
 import { DateHeader } from './components/DateHeader';
 import { SpecialEventCard } from './components/SpecialEventCard';
-import { getHijriDate, calculateDaylight, getNextPrayer } from './utils/dateUtils';
+import { calculateDaylight, getNextPrayer } from './utils/dateUtils';
+import { getHijriDate, isRamadan } from './utils/hijriDateUtils';
 import { parsePrayerTimes, getPrayerTimeForDate } from './utils/csvUtils';
 import { PrayerTime } from './types';
 import { Sun, ChevronLeft, ChevronRight } from 'lucide-react';
 import { prayerTimesData } from './data/prayer-times';
+
 
 function App() {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -64,10 +66,17 @@ function App() {
 
   const { name: nextPrayer, remainingTime } = getNextPrayer(prayerData);
   const { hours: daylightHours, minutes: daylightMinutes } = calculateDaylight(prayerData);
+  const hijriDate = getHijriDate(selectedDate);
+  const isRamadanMonth = isRamadan(hijriDate);
 
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-lg mx-auto p-4">
+        {isRamadanMonth && (
+          <div className="bg-emerald-50 border-l-4 border-emerald-500 p-4 rounded-r-lg mb-6">
+            <p className="text-emerald-900">Ramadan Mubarak!</p>
+          </div>
+        )}
         <div className="flex items-center justify-between mb-4">
           <button
             onClick={handlePreviousDay}
@@ -77,7 +86,7 @@ function App() {
           </button>
           <DateHeader 
             selectedDate={selectedDate} // Pass the selectedDate directly
-            hijriDate={getHijriDate(selectedDate)}
+            hijriDate={hijriDate.format} // Pass the hijriDate directly
             onDateChange={handleDateChange}
           />
           <button
@@ -94,6 +103,10 @@ function App() {
         />
         <SpecialEventCard note={prayerData.notes} />
         <div className="space-y-3">
+          Vaktet për datën:
+          <span> {selectedDate.toDateString()}</span>    
+        </div>
+        <div className="grid grid-cols-2 gap-4">
           <PrayerCard name="Imsaku" time={prayerData.fajr} isNext={nextPrayer === 'Imsaku'} />
           <PrayerCard name="Lindja e Diellit" time={prayerData.sunrise} isNext={nextPrayer === 'Lindja e Diellit'} />
           <PrayerCard name="Dreka" time={prayerData.dhuhr} isNext={nextPrayer === 'Dreka'} />

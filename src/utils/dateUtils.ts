@@ -1,46 +1,11 @@
 import { PrayerTime } from '../types';
 
-const hijriMonths = {
-  Muharram: 'Muharrem',
-  Safar: 'Sefer',
-  'Rabi al-awwal': 'Rebiul-Evvel',
-  'Rabi al-thani': 'Rebiul-Ahir',
-  'Jumada al-awwal': 'Xhumadel-Ula',
-  'Jumada al-thani': 'Xhumadel-Ahireh',
-  Rajab: 'Rexheb',
-  Shaban: 'Shaban',
-  Ramadan: 'Ramazan',
-  Shawwal: 'Shevval',
-  'Dhu al-Qidah': 'Dhul-Ka\'de',
-  'Dhu al-Hijjah': 'Dhul-Ḥixhxhe'
-};
-
-export function getHijriDate(date: Date): string {
-  const options: Intl.DateTimeFormatOptions = { 
-    calendar: 'islamic',
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric'
-  };
-  
-  const hijriDate = date.toLocaleDateString('en-US-u-ca-islamic', options);
-  const [day, month, year] = hijriDate.split(' ');
-  
-  // Find the corresponding transliterated month name
-  const monthKey = Object.keys(hijriMonths).find(key => 
-    month.toLowerCase().includes(key.toLowerCase())
-  );
-  
-  const transliteratedMonth = monthKey ? hijriMonths[monthKey as keyof typeof hijriMonths] : month;
-  
-  return `${day} ${transliteratedMonth} ${year}`;
-}
 export function calculateDaylight(prayerTime: PrayerTime): { hours: number; minutes: number } {
-const sunrise = new Date(`2000/01/01 ${prayerTime.sunrise.replace(/\s/g, '')}`);
-const maghrib = new Date(`2000/01/01 ${prayerTime.maghrib.replace(/\s/g, '')}`);
-const diff = maghrib.getTime() - sunrise.getTime();
-const hours = Math.floor(diff / (1000 * 60 * 60));
-const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const sunrise = new Date(`2000/01/01 ${prayerTime.sunrise.replace(/\s/g, '')}`);
+  const maghrib = new Date(`2000/01/01 ${prayerTime.maghrib.replace(/\s/g, '')}`);
+  const diff = maghrib.getTime() - sunrise.getTime();
+  const hours = Math.floor(diff / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
   return { hours, minutes };
 }
 
