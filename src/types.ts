@@ -1,17 +1,12 @@
 export interface PrayerTime {
   date: string;
   fajr: string;
+  sabahu: string;
   sunrise: string;
   dhuhr: string;
   asr: string;
   maghrib: string;
   isha: string;
-  daylight: string;
+  festat: string;
   notes: string;
-}
-
-export interface ParsedPrayerTime extends PrayerTime {
-  daylightHours: number;
-  daylightMinutes: number;
-  hijriDate: string;
 }
