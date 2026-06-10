@@ -5,22 +5,25 @@ export function parsePrayerTimes(csvData: string): PrayerTime[] {
   const [header, ...rows] = lines;
   
   return rows.map(row => {
-    const [date, fajr, sunrise, dhuhr, asr, maghrib, isha, daylight, notes] = row.split(',');
+    const [date, fajr, sabahu, sunrise, dhuhr, asr, maghrib, isha, festat, notes] = row.split(',');
     return {
       date,
       fajr,
+      sabahu,
       sunrise,
       dhuhr,
       asr,
       maghrib,
       isha,
-      daylight,
+      festat: festat?.trim() || '',
       notes: notes?.trim() || ''
     };
   });
 }
 
 export function getPrayerTimeForDate(prayerTimes: PrayerTime[], date: Date): PrayerTime | undefined {
-  const dateString = date.toISOString().split('T')[0];
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const dateString = `${month}-${day}`;
   return prayerTimes.find(pt => pt.date === dateString);
 }
