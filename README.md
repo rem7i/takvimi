@@ -1,113 +1,54 @@
-# Takvimi
+# Takvimi 🕌
 
-Takvimi is a prayer times application that provides accurate Islamic prayer schedules with additional features for tracking Hijri dates and daylight hours.
+**Takvimi** is a simple, beautiful prayer times app made for the Albanian-speaking Muslim community. It shows you accurate daily prayer schedules, counts down to the next prayer, and keeps you connected with Islamic dates and holidays — all in Albanian.
 
-## Features
+## ✨ What It Does
 
-- **Prayer Time Tracking**: Get accurate times for all daily prayers (Fajr/Imsaku, Sunrise/Lindja, Dhuhr/Dreka, Asr/Ikindia, Maghrib/Akshami, Isha/Jacia)
-- **Next Prayer Countdown**: Shows the upcoming prayer with a real-time countdown
-- **Hijri Calendar**: Displays the current Islamic date with localized month names
-- **Daylight Calculator**: Calculates daylight hours between sunrise and sunset
+- **Prayer times at a glance** — See all five daily prayers plus Imsaku, Sabahu, and Sunrise, tailored for your location.
+- **Next prayer countdown** — Know exactly how much time is left until the next prayer, updated in real time.
+- **Gregorian + Hijri calendar** — See both today's date and the Islamic date with Albanian-transliterated month names.
+- **Islamic festivals** — Browse upcoming Islamic holidays and special days throughout the year.
+- **Daylight hours** — See how long the day is from sunrise to sunset.
+- **Ramadan mode** — A special banner greets you during the holy month of Ramadan.
 
-## Technical Overview
+## 🖼️ How It Looks
 
-The application is built using TypeScript and provides utilities for:
+The app is designed to be clean, calm, and easy to read. It works great on both phones and desktops.
 
-- Converting Gregorian dates to Hijri dates with proper transliteration
-- Calculating the time remaining until the next prayer
-- Computing daylight duration based on sunrise and sunset times
-
-## Usage Examples
-
-### Getting the Hijri Date
-
-```typescript
-import { getHijriDate } from './utils/dateUtils';
-
-const today = new Date();
-const hijriDate = getHijriDate(today);
-console.log(`Today in Hijri calendar: ${hijriDate}`);
-```
-
-### Finding the Next Prayer
-
-```typescript
-import { getNextPrayer } from './utils/dateUtils';
-import { PrayerTime } from './types';
-
-const todayPrayers: PrayerTime = {
-  fajr: '04:30',
-  sunrise: '06:15',
-  dhuhr: '13:00',
-  asr: '16:45',
-  maghrib: '20:10',
-  isha: '21:45'
-};
-
-const nextPrayer = getNextPrayer(todayPrayers);
-console.log(`Next prayer: ${nextPrayer.name} in ${nextPrayer.remainingTime}`);
-```
-
-### Calculating Daylight Hours
-
-```typescript
-import { calculateDaylight } from './utils/dateUtils';
-import { PrayerTime } from './types';
-
-const todayPrayers: PrayerTime = {
-  fajr: '04:30',
-  sunrise: '06:15',
-  dhuhr: '13:00',
-  asr: '16:45',
-  maghrib: '20:10',
-  isha: '21:45'
-};
-
-const daylight = calculateDaylight(todayPrayers);
-console.log(`Daylight today: ${daylight.hours} hours and ${daylight.minutes} minutes`);
-```
-
-## Localization
-
-The application supports transliteration of Hijri month names to the following format:
-
-| English | Transliterated |
-|---------|---------------|
-| Muharram | Muharrem |
-| Safar | Sefer |
-| Rabi al-awwal | Rebiul-Evvel |
-| Rabi al-thani | Rebiul-Ahir |
-| Jumada al-awwal | Xhumadel-Ula |
-| Jumada al-thani | Xhumadel-Ahireh |
-| Rajab | Rexheb |
-| Shaban | Shaban |
-| Ramadan | Ramazan |
-| Shawwal | Shevval |
-| Dhu al-Qidah | Dhul-Ka'de |
-| Dhu al-Hijjah | Dhul-Ḥixhxhe |
-
-## Installation
+## 🚀 Getting Started
 
 ```bash
+# Download the code
 git clone https://github.com/rem7i/takvimi.git
-```
 
-```bash
+# Go into the folder
 cd takvimi
-```
 
-```bash
+# Install everything you need
 npm install
-```
 
-```bash
+# Start the app
 npm run dev
 ```
 
-## Contributing
+Then open `http://localhost:5173` in your browser and you're all set.
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+## 🛠️ Built With
 
-## License
+- [React](https://react.dev) + [TypeScript](https://www.typescriptlang.org/) — the core framework
+- [Vite](https://vitejs.dev/) — fast development server and build tool
+- [Tailwind CSS](https://tailwindcss.com/) — styling
+- [Lucide React](https://lucide.dev/) — icons
+- [hijri-js](https://github.com/xsoh/hijri-js) & [@umalqura/core](https://github.com/OSamaArab/umalqura-core) — Hijri date calculations
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+## 🌍 Language
+
+The entire interface is in **Albanian (shqip)** — prayer names, dates, labels, and all. It's built for Albanian-speaking users who want a prayer times app that speaks their language.
+
+## 🤝 Contributing
+
+Found a bug? Have an idea? Feel free to open an issue or send a pull request. All contributions are welcome!
+
+## 📄 License
+
+This project is open source under the [MIT License](LICENSE).
