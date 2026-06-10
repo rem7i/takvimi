@@ -3,6 +3,7 @@ import { PrayerCard } from './components/PrayerCard';
 import { NextPrayerCard } from './components/NextPrayerCard';
 import { DateHeader } from './components/DateHeader';
 import { SpecialEventCard } from './components/SpecialEventCard';
+import { FestivalsModal } from './components/FestivalsModal';
 import { calculateDaylight, getNextPrayer } from './utils/dateUtils';
 import { getHijriDate, isRamadan } from './utils/hijriDateUtils';
 import { parsePrayerTimes, getPrayerTimeForDate } from './utils/csvUtils';
@@ -16,6 +17,7 @@ function App() {
   const [prayerTimes, setPrayerTimes] = useState<PrayerTime[]>([]);
   const [prayerData, setPrayerData] = useState<PrayerTime | undefined>();
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [showFestivals, setShowFestivals] = useState(false);
 
   useEffect(() => {
     const parsedTimes = parsePrayerTimes(prayerTimesData);
@@ -39,10 +41,6 @@ function App() {
 
     return () => clearInterval(timer);
   }, []);
-
-  const handleDateChange = (selectedDate: Date) => {
-    setSelectedDate(selectedDate);
-  };
 
   const handlePreviousDay = () => {
     const newDate = new Date(selectedDate);
@@ -85,9 +83,8 @@ function App() {
             <ChevronLeft className="w-5 h-5 text-gray-600" />
           </button>
           <DateHeader 
-            selectedDate={selectedDate} // Pass the selectedDate directly
-            hijriDate={hijriDate.format} // Pass the hijriDate directly
-            onDateChange={handleDateChange}
+            selectedDate={selectedDate}
+            hijriDate={hijriDate.format}
           />
           <button
             onClick={handleNextDay}
@@ -96,6 +93,13 @@ function App() {
             <ChevronRight className="w-5 h-5 text-gray-600" />
           </button>
         </div>
+        <button
+          onClick={() => setShowFestivals(true)}
+          className="w-full mb-3 p-3 bg-white border border-emerald-200 rounded-lg flex items-center justify-center space-x-2 hover:bg-emerald-50 transition-colors"
+        >
+          <Calendar className="w-5 h-5 text-emerald-600" />
+          <span className="text-emerald-800 font-medium">Festat islame</span>
+        </button>
         <div className="flex items-center mb-2">
             <Calendar className="w-5 h-5 text-gray-600" />
             <span className="text-gray-900 font-medium">
@@ -110,12 +114,20 @@ function App() {
                 
         <div className="space-y-3">
           <PrayerCard name="Imsaku" time={prayerData.fajr} isNext={nextPrayer === 'Imsaku'} />
+          <PrayerCard name="Sabahu" time={prayerData.sabahu} isNext={nextPrayer === 'Sabahu'} />
           <PrayerCard name="Lindja e Diellit" time={prayerData.sunrise} isNext={nextPrayer === 'Lindja e Diellit'} />
           <PrayerCard name="Dreka" time={prayerData.dhuhr} isNext={nextPrayer === 'Dreka'} />
           <PrayerCard name="Ikindia" time={prayerData.asr} isNext={nextPrayer === 'Ikindia'} />
           <PrayerCard name="Akshami" time={prayerData.maghrib} isNext={nextPrayer === 'Akshami'} />
           <PrayerCard name="Jacia" time={prayerData.isha} isNext={nextPrayer === 'Jacia'} />
         </div>
+
+        {showFestivals && (
+          <FestivalsModal
+            prayerTimes={prayerTimes}
+            onClose={() => setShowFestivals(false)}
+          />
+        )}
 
         <div className="mt-6 bg-blue-50 p-4 rounded-lg">
           <div className="flex items-center space-x-2">
