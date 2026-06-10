@@ -8,7 +8,7 @@ import { calculateDaylight, getNextPrayer } from './utils/dateUtils';
 import { getHijriDate, isRamadan } from './utils/hijriDateUtils';
 import { parsePrayerTimes, getPrayerTimeForDate } from './utils/csvUtils';
 import { PrayerTime } from './types';
-import { Sun, ChevronLeft, ChevronRight, Calendar } from 'lucide-react';
+import { Sun, ChevronLeft, ChevronRight, Calendar, Globe, Github } from 'lucide-react';
 import { prayerTimesData } from './data/prayer-times';
 
 
@@ -93,13 +93,6 @@ function App() {
             <ChevronRight className="w-5 h-5 text-gray-600" />
           </button>
         </div>
-        <button
-          onClick={() => setShowFestivals(true)}
-          className="w-full mb-3 p-3 bg-white border border-emerald-200 rounded-lg flex items-center justify-center space-x-2 hover:bg-emerald-50 transition-colors"
-        >
-          <Calendar className="w-5 h-5 text-emerald-600" />
-          <span className="text-emerald-800 font-medium">Festat islame</span>
-        </button>
         <div className="flex items-center mb-2">
             <Calendar className="w-5 h-5 text-gray-600" />
             <span className="text-gray-900 font-medium">
@@ -137,8 +130,37 @@ function App() {
             </span>
           </div>
         </div>
-            
-        
+
+        <button
+          onClick={() => setShowFestivals(true)}
+          className="w-full mt-6 p-3 bg-white border border-emerald-200 rounded-lg flex items-center justify-center space-x-2 hover:bg-emerald-50 transition-colors"
+        >
+          <Calendar className="w-5 h-5 text-emerald-600" />
+          <span className="text-emerald-800 font-medium">Festat islame</span>
+        </button>
+
+        <div className="mt-8 pt-4 border-t border-gray-200 text-center text-gray-500 text-sm">
+          <p>&copy; {new Date().getFullYear()} Takvimi</p>
+          <div className="flex items-center justify-center space-x-4 mt-2">
+            <a
+              href="https://remzinura.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-emerald-600 transition-colors"
+            >
+              <Globe className="w-5 h-5" />
+            </a>
+            <a
+              href="https://github.com/rem7i/takvimi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-emerald-600 transition-colors"
+            >
+              <Github className="w-5 h-5" />
+            </a>
+          </div>
+        </div>
+
       </div>
     </div>
   );
