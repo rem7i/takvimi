@@ -13,7 +13,8 @@ export function getNextPrayer(prayerTime: PrayerTime): { name: string; remaining
   const now = new Date();
   const prayers = [
     { name: 'Imsaku', time: prayerTime.fajr },
-    { name: 'Lindja', time: prayerTime.sunrise },
+    { name: 'Sabahu', time: prayerTime.sabahu },
+    { name: 'Lindja e Diellit', time: prayerTime.sunrise },
     { name: 'Dreka', time: prayerTime.dhuhr },
     { name: 'Ikindia', time: prayerTime.asr },
     { name: 'Akshami', time: prayerTime.maghrib },
