@@ -72,7 +72,7 @@ function App() {
       <div className="max-w-lg mx-auto p-4">
         {isRamadanMonth && (
           <div className="bg-emerald-50 border-l-4 border-emerald-500 p-4 rounded-r-lg mb-6">
-            <p className="text-emerald-900">Ramadan Mubarak!</p>
+            <p className="text-emerald-900">Urime Ramazanin!</p>
           </div>
         )}
         <div className="flex items-center justify-between mb-4">
@@ -93,18 +93,18 @@ function App() {
             <ChevronRight className="w-5 h-5 text-gray-600" />
           </button>
         </div>
-        <div className="flex items-center mb-2">
-            <Calendar className="w-5 h-5 text-gray-600" />
-            <span className="text-gray-900 font-medium">
-            Vaktet për datën {selectedDate.toLocaleDateString()}:
-            </span>
-        </div>
+        
         <NextPrayerCard 
           prayerName={nextPrayer}
           remainingTime={remainingTime}
         />
         <SpecialEventCard note={prayerData.notes} />
-                
+          <div className="flex items-center mb-2">
+            <Calendar className="w-5 h-5 text-gray-600" />
+            <span className="text-gray-900 font-medium">
+            Vaktet për datën {selectedDate.toLocaleDateString()}:
+            </span>
+        </div>      
         <div className="space-y-3">
           <PrayerCard name="Imsaku" time={prayerData.fajr} isNext={nextPrayer === 'Imsaku'} />
           <PrayerCard name="Sabahu" time={prayerData.sabahu} isNext={nextPrayer === 'Sabahu'} />
